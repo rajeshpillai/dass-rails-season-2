@@ -14,3 +14,22 @@
  *= require_tree .
  *= require_self
  */
+
+
+ header {
+  
+   nav {
+    background: #EEE;
+     display:flex;
+     justify-content: right;
+     a{
+       color:#000;
+       padding: 15px;
+     }
+   }
+ }
+
+.card {
+  min-height: 160px;
+    height: auto;
+}
