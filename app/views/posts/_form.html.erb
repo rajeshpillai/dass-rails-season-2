@@ -1,0 +1,54 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select :category_id, Category.all, :id, :name %>
+  </div>
+
+  Tags:
+  <div class="field">
+    <%= form.collection_select :tag_ids, Tag.all, 
+      :id, :name,{include_blank: true}, 
+      {:multiple => true} 
+    %>
+
+    <%= form.collection_check_boxes :tag_ids, Tag.all, 
+      :id, :name,{include_blank: true}
+    %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :all_tags, 
+      placeholder: "Tags separated with comma" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :published %>
+    <%= form.check_box :published %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

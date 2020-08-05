@@ -1,0 +1,28 @@
+
+<div class="container">
+  <% @posts.each do |post|  %>
+    <div class="row"> 
+      <div class="col-sm-12">
+        <h2><%= post.title %></h2>
+        <%= simple_format post.description %>
+        
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <span class="badge badge-warning">
+      <%= post.category.name %></span>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <% post.tags.each do |tag| %>
+          <span class="badge"><%=tag.name%></span>
+        <%end%>
+      </div>
+    </div
+
+    <hr/>
+
+
+  <%end%>
+</div>
