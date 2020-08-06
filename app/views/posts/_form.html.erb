@@ -23,10 +23,10 @@
 
   Tags:
   <div class="field">
-    <%= form.collection_select :tag_ids, Tag.all, 
-      :id, :name,{include_blank: true}, 
+    <!--<%= form.collection_select :tag_ids, Tag.all, 
+      :id, :name,{include_blank: false}, 
       {:multiple => true} 
-    %>
+    %>-->
 
     <%= form.collection_check_boxes :tag_ids, Tag.all, 
       :id, :name,{include_blank: true}
