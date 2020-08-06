@@ -12,6 +12,9 @@ class Post < ApplicationRecord
 
    # tag_ids
 
+   # let's create an action text
+   has_rich_text  :description
+
    def all_tags=(names) 
       if names.blank? 
          return 
@@ -26,6 +29,11 @@ class Post < ApplicationRecord
 
    def all_tags 
       tags.map(&:name).join(", ")
+   end
+
+   #helper/custom method
+   def post_body 
+      self.description.body
    end
 
 end

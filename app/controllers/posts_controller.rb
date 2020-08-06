@@ -1,6 +1,14 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+
+  def process_post
+
+    PostPublishingJob.perform_later
+
+    render plain: "Delayed job"
+  end
+
   # GET /posts
   # GET /posts.json
   def index
@@ -22,6 +30,18 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    # KEPT FOR REFERENCE 
+
+    #render json: @post 
+    # respond_to do |format|
+    #     format.html 
+    #     # format.json{ render json:@post}
+    #     format.json { render json: @post.as_json(
+    #       only: [:id, :name, :body],
+    #       methods: :post_body,
+    #       include: [:category, {tags: {only:[:name]}}])
+    #     }
+    # end
   end
 
   # GET /posts/new
