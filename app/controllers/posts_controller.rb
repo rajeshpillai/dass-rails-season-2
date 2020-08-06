@@ -4,7 +4,19 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.includes(:category).all
+    # @posts = Post.includes(:category).page(params[:page]).per(10)
+    @q = Post.ransack(params[:q])
+    @posts = @q.result().page(params[:page]).per(10)
+
+    # @posts_published = Post.published
+    # @posts_unpublished = Post.unpublished
+
+    # @top_5 = Post.limit_5
+
+    # @latest_posts = Post.order_by_latest_first
+
+    # @all_combinded = Post.published.order_by_latest_first.limit_5
+
   end
 
   # GET /posts/1
@@ -24,7 +36,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    # alltags = all_tags(params[:post][:all_tags])
+
+    # loops and explicitly creates
+
     @post = Post.new(post_params)
+    # @post.tags = alltags
 
 
     respond_to do |format|
@@ -37,6 +54,18 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  #  def all_tags(names)
+  #     if names.blank? 
+  #        return 
+  #     end
+  #     # ruby, rails
+  #     tags = names.split(",").map do |name| 
+  #        unless name.blank?  
+  #           Tag.where(name: name.strip).first_or_create!
+  #        end
+  #     end
+  #  end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json

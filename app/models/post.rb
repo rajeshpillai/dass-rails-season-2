@@ -4,6 +4,14 @@ class Post < ApplicationRecord
    has_many :taggings # join table
    has_many :tags, through: :taggings
 
+   scope :published, lambda { where(published: true)}
+   scope :unpublished, -> { where(published: false)}
+
+   scope :limit_5, -> { limit(5)}
+   scope :order_by_latest_first, -> { order(created_at: :desc)}
+
+   # tag_ids
+
    def all_tags=(names) 
       if names.blank? 
          return 
