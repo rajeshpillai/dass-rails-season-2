@@ -10,6 +10,9 @@ class Post < ApplicationRecord
    scope :limit_5, -> { limit(5)}
    scope :order_by_latest_first, -> { order(created_at: :desc)}
 
+   # File upload
+   has_one_attached :featured_image
+
    # tag_ids
 
    # let's create an action text
