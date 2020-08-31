@@ -1,0 +1,20 @@
+  <div class="mb-2 col-sm-3 " >
+    <div class="card " >
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <span class="card-text">
+          <%= post.description %>
+        </span>
+        <h6>
+          <%= post.category.name %>
+        </h6>
+        <div>
+          <% post.tags.each do |tag| %>
+          <span class="badge">
+            <%= link_to tag.name, tag_search_path(tag.name) %>
+          </span>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
