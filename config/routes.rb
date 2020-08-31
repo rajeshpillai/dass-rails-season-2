@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "posts/process_post", as: "process_post"
   get "public/tags/:tag", to: "public#tags", :as => :tag_search
+  get "public/category/:category/posts", to: "public#category", :as => :category_search
 
   resources :tags 
 

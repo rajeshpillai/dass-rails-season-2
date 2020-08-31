@@ -10,4 +10,9 @@ class PublicController < ApplicationController
     tag = params[:tag]
     @posts =  Tag.find_by(:name => tag).posts     #Tag.where(name: tag)
   end
+
+  def category
+    category = params[:category]
+    @posts =  Category.where('lower(name) = ?', category.downcase).first.posts
+  end
 end

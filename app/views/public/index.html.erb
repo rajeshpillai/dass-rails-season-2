@@ -11,7 +11,9 @@
     <h6>Categories</h6>
     <ul class="list-group">
       <% @categories.each do |category| %>
-        <li class="list-group-item"><%= category.name%></li>
+        <li class="list-group-item">
+          <%= link_to category.name, category_search_path(category.name.downcase) %>
+        </li>
       <% end%>
     </ul>
     
