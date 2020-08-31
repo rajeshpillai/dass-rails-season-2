@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   get "posts/process_post", as: "process_post"
   get "public/tags/:tag", to: "public#tags", :as => :tag_search
   get "public/category/:category/posts", to: "public#category", :as => :category_search
+  get "public/read/:id/", to: "public#read", :as => :post_read
 
   resources :tags 
-
   resources :categories
   resources :posts
+
   devise_for :users
+
   get 'public/index'
 
   namespace :admin do 

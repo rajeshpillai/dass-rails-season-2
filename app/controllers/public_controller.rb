@@ -5,6 +5,12 @@ class PublicController < ApplicationController
     @categories = Category.all
   end
 
+  def read
+    # @post = Post.find_by_slug(params[:slug])
+    @post = Post.friendly.find(params[:id])
+
+  end
+
   # Search input for tag
   def tags 
     tag = params[:tag]

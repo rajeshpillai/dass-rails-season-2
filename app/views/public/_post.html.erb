@@ -1,7 +1,11 @@
   <div class="mb-2 col-sm-3 " >
     <div class="card " >
       <div class="card-body">
-        <h5 class="card-title"><%= post.title %></h5>
+        <h5 class="card-title">
+        <!--<%= link_to post.title, controller: :public, action: :read, id: post.slug %> -->
+          <%= link_to post.title, post_read_path(id: post.slug)%>
+          <%= post.slug %>
+        </h5>
         <span class="card-text">
           <%= post.description %>
         </span>
