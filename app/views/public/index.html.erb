@@ -10,9 +10,9 @@
   <div class="col-sm-2">
     <h6>Categories</h6>
     <ul class="list-group">
-      <li class="list-group-item">Rails</li>
-      <li class="list-group-item">Ruby</li>
-      <li class="list-group-item">CSs</li>
+      <% @categories.each do |category| %>
+        <li class="list-group-item"><%= category.name%></li>
+      <% end%>
     </ul>
     
   </div>
