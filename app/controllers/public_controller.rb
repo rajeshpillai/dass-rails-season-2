@@ -1,7 +1,7 @@
 class PublicController < ApplicationController
   def index
-    # @posts = Post.all
-    @posts = Post.includes(:tags, :category).order(created_at: :desc)
+    # @posts = @q.result().page(params[:page]).per(10)
+    @posts = Post.includes(:tags, :category).order(created_at: :desc).page(params[:page]).per(10)
     @categories = Category.all
   end
 
