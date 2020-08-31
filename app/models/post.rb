@@ -18,6 +18,8 @@ class Post < ApplicationRecord
    # let's create an action text
    has_rich_text  :description
 
+   validates_presence_of :title, :category_id, :description
+
    def all_tags=(names) 
       if names.blank? 
          return 
