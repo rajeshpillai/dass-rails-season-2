@@ -3,6 +3,7 @@ class PublicController < ApplicationController
     # @posts = @q.result().page(params[:page]).per(10)
     @posts = Post.includes(:tags, :category).order(created_at: :desc).page(params[:page]).per(10)
     @categories = Category.all
+    @tags = Tag.all
   end
 
   def read
