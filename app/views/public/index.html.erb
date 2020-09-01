@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row"> 
-    <div class="col-sm-10">
+    <div class="col-md-9">
       <div class="row">
         <% @posts.each do |post|  %>
           <%= render partial: 'post', locals: {post: post}  %>
         <% end%>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-md-3">
       <h6>Categories</h6>
       <ul class="list-group">
         <% @categories.each do |category| %>
@@ -20,7 +20,9 @@
       <ul class="list-group">
         <% @tags.each do |tag| %>
           <li class="list-group-item">
-            <%= link_to tag.name, tag_search_path(tag.name.downcase) %>
+            <%# link_to tag.name, tag_search_path(tag.name.downcase) %>
+            <%= link_to "#{tag[:name]} (#{tag[:total_posts]})", tag_search_path(tag[:name].downcase) %>
+            
           </li>
        <% end%>
       </ul>

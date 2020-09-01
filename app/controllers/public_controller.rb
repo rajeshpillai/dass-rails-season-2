@@ -3,7 +3,19 @@ class PublicController < ApplicationController
     # @posts = @q.result().page(params[:page]).per(10)
     @posts = Post.includes(:tags, :category).order(created_at: :desc).page(params[:page]).per(10)
     @categories = Category.all
-    @tags = Tag.all
+
+    # Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
+    #  total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
+    
+    # Query
+    # SELECT tags.id, tags.name, count(posts.id) as total_posts FROM "tags" 
+    #    INNER JOIN "taggings" ON "taggings"."tag_id" = "tags"."id" 
+    #    INNER JOIN "posts" ON "posts"."id" = "taggings"."post_id" GROUP BY tags.name
+
+    @tags = Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
+    total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
+    
+    p "TAGS: ", @tags
   end
 
   def read
