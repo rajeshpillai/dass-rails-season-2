@@ -4,7 +4,9 @@
         <h5 class="card-title">
         <!--<%= link_to post.title, controller: :public, action: :read, id: post.slug %> -->
           <%= link_to post.title, post_read_path(id: post.slug)%>
-          <%= post.slug %>
+        </h5>
+        <h6 class="card-title">
+          Permalink: <%= post_read_url(id: post.slug) %>
         </h5>
         <span class="card-text">
           <%= post.description %>
