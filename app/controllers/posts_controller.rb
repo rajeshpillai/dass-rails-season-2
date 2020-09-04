@@ -2,6 +2,27 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
 
+
+  def publish 
+    post_ids = params[:pub_post_ids]
+    action = params[:publish] || params[:unpublish]
+
+    p "action: ", action
+
+    # post_ids.each do |post_id|
+    #   p post_id
+
+    # end
+
+    
+    Post.where(id: post_ids).update_all published: true if action == "Publish"
+    Post.where(id: post_ids).update_all published: false if action == "UnPublish"
+
+
+    redirect_to posts_path
+  end
+
+
   def process_post
 
     PostPublishingJob.perform_later
@@ -123,6 +144,6 @@ class PostsController < ApplicationController
     end
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :description, :published, :category_id, :all_tags, :featured_image, tag_ids:[])
+      params.require(:post).permit(:title, :description, :published, :category_id, :all_tags, :featured_image, :publish,:unpublish, tag_ids:[], pub_post_ids:[])
     end
 end

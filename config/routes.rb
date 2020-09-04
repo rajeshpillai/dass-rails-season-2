@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   resources :tags 
   resources :categories
-  resources :posts
+  resources :posts do 
+    collection do 
+      post 'publish', :action => "publish"
+    end
+  end
 
   devise_for :users
 
