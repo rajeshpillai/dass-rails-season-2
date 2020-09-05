@@ -18,7 +18,7 @@ connection.close()
 
 puts "Deleted auto genenerated tables..."
 
-
+Comment.delete_all
 Tagging.delete_all 
 Post.delete_all
 Tag.delete_all 
@@ -59,11 +59,21 @@ Category.all.each do |category|
   10.times do |i|
     puts "Post #{index}..."
     post = Post.new(title: "Post #{i}", 
+      user: admin_user, 
       slug: "post-#{index}",
       tags: i % 2 == 0 ? [javascript, react] : [ruby, node],
       description: "Post details", category: category)
+    
+    post.save
 
+    2.times do |comment_index|
+      puts "Comments #{comment_index}..."
+      post.comments.build(body: "Hello #{comment_index}",
+        user: admin_user)
       post.save
-      index = index + 1
+    end
+
+
+    index = index + 1
   end
 end

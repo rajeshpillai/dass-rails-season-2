@@ -3,9 +3,11 @@ class Post < ApplicationRecord
    friendly_id :title, use: :slugged
 
    belongs_to :category
+   belongs_to :user
 
    has_many :taggings # join table
    has_many :tags, through: :taggings
+   has_many :comments
 
    scope :published, lambda { where(published: true)}
    scope :unpublished, -> { where(published: false)}
