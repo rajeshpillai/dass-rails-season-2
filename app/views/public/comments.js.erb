@@ -1,2 +1,10 @@
-$("#comment_body").val("");
-$("<%= j(render partial: 'comment', locals:{comment:@comment}) %>").prependTo("#comments-list");
+$(".error").html("");
+
+<% if @comment.errors.any? %>
+    $("<%= j(render partial: 'error', locals:{comment:@comment}) %>").prependTo("#comments-list");
+
+<% else %>
+  $("#comment_body").val("");
+  $("<%= j(render partial: 'comment', locals:{comment:@comment}) %>").prependTo("#comments-list");
+
+<%end %>

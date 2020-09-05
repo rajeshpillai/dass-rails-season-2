@@ -25,7 +25,13 @@ class PublicController < ApplicationController
     @post = Post.friendly.find(params[:post_id])
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    @comment.save
+    @comment.save 
+
+    respond_to do |format|
+        format.html { redirect_to post_read_path(@post), notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @comment }
+        format.js { render }
+    end
 
     # redirect_to post_read_path(@post)
   end
