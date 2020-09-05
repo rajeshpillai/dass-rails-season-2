@@ -36,7 +36,19 @@
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
      
-      <%= yield %>
+      <div class="row">
+        <div class="col-md-9">
+          <%= yield %>
+        </div>
+        <div class="col-md-3">
+          <% if controller.controller_name == "public" %>
+            <h6>CATEGORIES</h6>
+            <%= render 'layouts/categories', :categories => @categories%>
+            <h6>TAGS</h6>
+            <%= render 'layouts/tagcloud',  :tags => @tags %>
+          <% end %>
+       </div>
+      </div>
     </div>
   </body>
 </html>

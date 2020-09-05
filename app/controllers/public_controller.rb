@@ -3,8 +3,7 @@ class PublicController < ApplicationController
   def index
     # @posts = @q.result().page(params[:page]).per(10)
     @posts = Post.includes(:tags, :category).order(created_at: :desc).page(params[:page]).per(10)
-    @categories = Category.all
-
+    
     # Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
     #  total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
     
@@ -12,10 +11,13 @@ class PublicController < ApplicationController
     # SELECT tags.id, tags.name, count(posts.id) as total_posts FROM "tags" 
     #    INNER JOIN "taggings" ON "taggings"."tag_id" = "tags"."id" 
     #    INNER JOIN "posts" ON "posts"."id" = "taggings"."post_id" GROUP BY tags.name
-
-    @tags = Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
-    total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
     
+    # @categories = Category.all
+    # @tags = Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
+    # total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
+   
+    sidebar
+
     p "TAGS: ", @tags
   end
 
@@ -37,6 +39,7 @@ class PublicController < ApplicationController
   end
 
   def read
+    sidebar
     # @post = Post.find_by_slug(params[:slug])
     @post = Post.friendly.find(params[:id])
 
@@ -44,11 +47,18 @@ class PublicController < ApplicationController
 
   # Search input for tag
   def tags 
+    sidebar
+    @tags = Tag.joins(:posts).group("tags.name").select("tags.id, tags.name, count(posts.id) as
+    total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
+
+
     tag = params[:tag]
     @posts =  Tag.find_by(:name => tag).posts     #Tag.where(name: tag)
   end
 
   def category
+    sidebar
+
     category = params[:category]
     @posts =  Category.where('lower(name) = ?', category.downcase).first.posts
   end
@@ -57,6 +67,13 @@ class PublicController < ApplicationController
   def comment_params
     params.require(:comment).permit(:post_id, 
        :body)
+  end
+
+  def sidebar 
+    @categories = Category.all
+    @tags = Tag.joins(:posts)
+        .group("tags.name")
+        .select("tags.id, tags.name, count(posts.id) as total_posts").map { |t| {name: t.name, total_posts: t.total_posts}}
   end
 
 end

@@ -1,46 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <%= link_to 'Back', root_url %>
+  <p id="notice"><%= notice %></p>
 
-<% if @post.featured_image.attached? %>
-<%= image_tag @post.featured_image %>
-<% end %>
+  <% if @post.featured_image.attached? %>
+  <%= image_tag @post.featured_image %>
+  <% end %>
 
-<h2><%= @post.title %></h2>
+  <h2><%= @post.title %></h2>
 
-<p>
-  <%= @post.description %>
-</p>
+  <p>
+    <%= @post.description %>
+  </p>
 
+  <div>
+    <div class="col-md-9">
+      <h4>Start Conversation</h4>
+      <%= form_with url: comments_url(@post), local: false, scope: "comment" do |form| %>
+        <%= form.hidden_field :post_id, value: @post.id %>
+        
+        <div class="form-group">
+          <label>What do you want to say?</label>
+          <%= form.text_area :body, class: "form-control" %>
+        </div>
+        <div>
+          <%= form.submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
+  <br/>
 
+  <div>
+    <div class="col-sm-12">
+      <h4>Conversations</h4>
+    </div>
+  </div>
 
-<div class="row mt-3">
-  <div class="col-sm-12">
-    <h4>Start Conversation</h4>
-    <%= form_with url: comments_url(@post), local: false, scope: "comment" do |form| %>
-      <%= form.hidden_field :post_id, value: @post.id %>
-      
-      <div class="form-group">
-        <label>What do you want to say?</label>
-        <%= form.text_area :body, class: "form-control" %>
-      </div>
-      <div>
-        <%= form.submit %>
-      <div>
+  <div id="comments-list">
+    <% @post.comments.order("created_at desc").each do |comment|%>
+      <%= render partial: "comment", locals: {comment: comment} %>
     <% end %>
   </div>
-</div>
-
-<br/>
-
-<div class="row mt-3">
-  <div class="col-sm-12">
-    <h4>Conversations</h4>
-  </div>
-</div>
-
-<div id="comments-list">
-  <% @post.comments.order("created_at desc").each do |comment|%>
-    <%= render partial: "comment", locals: {comment: comment} %>
-  <% end %>
-</div>
-<%= link_to 'Back', root_url %>
+</div>  <!-- end of read -->
