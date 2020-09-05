@@ -1,1 +1,2 @@
+$("#comment_body").val("");
 $("<%= j(render partial: 'comment', locals:{comment:@comment}) %>").prependTo("#comments-list");
