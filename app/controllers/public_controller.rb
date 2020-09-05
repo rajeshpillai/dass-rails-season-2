@@ -1,4 +1,5 @@
 class PublicController < ApplicationController
+  before_action :authenticate_user!, only: [:comments]
   def index
     # @posts = @q.result().page(params[:page]).per(10)
     @posts = Post.includes(:tags, :category).order(created_at: :desc).page(params[:page]).per(10)
