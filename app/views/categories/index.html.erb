@@ -1,34 +1,26 @@
 <h1>Categories</h1>
-
+<hr/>
 <%= link_to 'New Category', new_category_path, class: "btn btn-primary" %>
 
 <br/>
 <br/>
 
-<table class="table table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Published</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
+  <% @categories.each do |category| %>
+    <div class="d-flex flex-row p-2">
+      <div>
+        <%= link_to category.name, category_search_path(category.name.downcase), remote: true, class: "category-expand" %>
+        <i class="fas fa-plus"></i>
+      </div>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><i class="fas fa-plus"></i></td>
-        <td><%= category.name %></td>
-        <td><%= category.description %></td>
-        <td><%= category.published %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div><%= category.name %></div>
+      <div><%= category.description %></div>
+      <div><%= link_to 'Show', category %></div>
+      <div><%= link_to 'Edit', edit_category_path(category) %></div>
+      <div><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    </div>
+    <div  id='<%="category_#{category.id}"%>' class="post-header"></div>
+  <% end %>
+</div>
 
-<br>
 

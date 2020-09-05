@@ -1,0 +1,5 @@
+<% posts.each do |post|%>
+  <div class="mb-2 col-md-12" >
+      <%= link_to post.title, post_read_path(id: post.slug)%>
+  </div>
+<% end %>

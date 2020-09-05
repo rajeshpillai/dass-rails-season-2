@@ -19,6 +19,12 @@ import "@fortawesome/fontawesome-free/js/all";
 
 document.addEventListener("turbolinks:load", () => {  
   // alert("JavaScript is now ready!")
+  $(".category-expand").on("click", function(e) {
+    let cat_id = $(this).attr("id");
+  })
+
+  $(".category-expand").on("ajax:success", function (e) {
+  })
 })
 
 

@@ -61,6 +61,11 @@ class PublicController < ApplicationController
 
     category = params[:category]
     @posts =  Category.where('lower(name) = ?', category.downcase).first.posts
+
+    respond_to do |format|
+      format.html 
+      format.js 
+    end
   end
 
   private 
