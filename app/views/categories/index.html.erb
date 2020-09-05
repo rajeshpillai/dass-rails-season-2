@@ -7,8 +7,8 @@
 
 <div class="container">
   <% @categories.each do |category| %>
-    <div class="d-flex flex-row p-2">
-      <div>
+    <div class="row">
+      <div class="col">
         
         <%= link_to category_search_path(category.name.downcase),
             remote: true, 
@@ -17,11 +17,10 @@
             <% end %>
       </div>
 
-      <div><%= category.name %></div>
-      <div><%= category.description %></div>
-      <div><%= link_to 'Show', category %></div>
-      <div><%= link_to 'Edit', edit_category_path(category) %></div>
-      <div><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+      <div class="col-3"><%= category.name %></div>
+      <div class="col"><%= link_to 'Show', category %></div>
+      <div class="col"><%= link_to 'Edit', edit_category_path(category) %></div>
+      <div class="col"><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></div>
     </div>
     <div  id='<%="category_#{category.id}"%>' class="post-header"></div>
   <% end %>

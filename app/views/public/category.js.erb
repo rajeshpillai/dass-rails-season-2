@@ -1,2 +1,13 @@
-$(".post-header").html("");
-$("#category_<%= @posts[0].category_id %>").html("<%= j render(partial: 'post_headers', locals: {posts: @posts}) %>").toggle();
+var cat_id = "<%= @posts[0].category_id %>";
+var e$ = $(`#category_${cat_id}`);
+
+$(`.post-header`).html("");
+
+e$.toggleClass("expanded");
+if (e$.hasClass("expanded")) {
+  e$.html("<%= j render(partial: 'post_headers', locals: {posts: @posts}) %>")
+} else {
+  e$.html("")
+}
+
+    
