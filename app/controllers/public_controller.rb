@@ -18,6 +18,16 @@ class PublicController < ApplicationController
     p "TAGS: ", @tags
   end
 
+
+  # Post comments
+  def comments
+    @post = Post.friendly.find(params[:post_id])
+    @comment = Comment.new(comment_params)
+    @comment.user = current_user
+    @comment.save
+    redirect_to post_read_path(@post)
+  end
+
   def read
     # @post = Post.find_by_slug(params[:slug])
     @post = Post.friendly.find(params[:id])
@@ -34,4 +44,11 @@ class PublicController < ApplicationController
     category = params[:category]
     @posts =  Category.where('lower(name) = ?', category.downcase).first.posts
   end
+
+  private 
+  def comment_params
+    params.require(:comment).permit(:post_id, 
+       :body)
+  end
+
 end

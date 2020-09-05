@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  resources :comments
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  
+  post 'public/comments/:post_id', to: 'public#comments', :as => :comments
 
   get "posts/process_post", as: "process_post"
   get "public/tags/:tag", to: "public#tags", :as => :tag_search
   get "public/category/:category/posts", to: "public#category", :as => :category_search
   get "public/read/:id/", to: "public#read", :as => :post_read
-
+  
   resources :tags 
   resources :categories
   resources :posts do 
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       post 'publish', :action => "publish"
     end
   end
+  
 
   devise_for :users
 
