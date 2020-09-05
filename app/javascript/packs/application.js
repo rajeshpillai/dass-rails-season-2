@@ -13,6 +13,10 @@ window.jQuery = $;
 window.$ = $;
 
 import 'bootstrap';
+
+import "@fortawesome/fontawesome-free/js/all";
+
+
 document.addEventListener("turbolinks:load", () => {  
   // alert("JavaScript is now ready!")
 })

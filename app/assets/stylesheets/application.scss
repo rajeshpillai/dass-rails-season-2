@@ -15,21 +15,27 @@
  *= require_self
  */
 
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
 
- header {
-  
-   nav {
-    background: #EEE;
-     display:flex;
-     justify-content: right;
-     a{
-       color:#000;
-       padding: 15px;
-     }
-   }
- }
+header {
+
+  nav {
+  background: #EEE;
+    display:flex;
+    justify-content: right;
+    a{
+      color:#000;
+      padding: 15px;
+    }
+  }
+}
 
 .card {
-  min-height: 160px;
-    height: auto;
+min-height: 160px;
+  height: auto;
 }
