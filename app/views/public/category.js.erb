@@ -1,2 +1,2 @@
 $(".post-header").html("");
-$("#category_<%= @posts[0].category_id %>").html("<%= j render(partial: 'post_headers', locals: {posts: @posts}) %>");
+$("#category_<%= @posts[0].category_id %>").html("<%= j render(partial: 'post_headers', locals: {posts: @posts}) %>").toggle();

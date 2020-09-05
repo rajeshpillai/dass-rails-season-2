@@ -9,8 +9,12 @@
   <% @categories.each do |category| %>
     <div class="d-flex flex-row p-2">
       <div>
-        <%= link_to category.name, category_search_path(category.name.downcase), remote: true, class: "category-expand" %>
-        <i class="fas fa-plus"></i>
+        
+        <%= link_to category_search_path(category.name.downcase),
+            remote: true, 
+            class: "category-expand" do%>
+            <i class="fas fa-plus"></i> 
+            <% end %>
       </div>
 
       <div><%= category.name %></div>
