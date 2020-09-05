@@ -1,5 +1,5 @@
-  <div class="mb-2 col-md-4 " >
-    <div class="card " >
+  <div class="mb-2 col-md-12" >
+    <div class="card" >
       <div class="card-body">
         <h5 class="card-title">
         <!--<%= link_to post.title, controller: :public, action: :read, id: post.slug %> -->
@@ -16,7 +16,7 @@
         </h6>
         <div>
           <% post.tags.each do |tag| %>
-          <span class="badge">
+          <span class="badge badge-warning">
             <%= link_to tag.name, tag_search_path(tag.name) %>
           </span>
           <%end%>
