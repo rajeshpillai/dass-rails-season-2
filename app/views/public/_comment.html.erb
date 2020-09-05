@@ -1,0 +1,10 @@
+<div class="container" id="<%= comment.id %>">
+  <div class="row card mb-3 p-2">
+    <div class="col-sm-12">
+      <div ><%= comment.body %> </div>
+      <footer class="text-muted mt-2">
+        commented by <%= comment.user.username %> about <%= time_ago_in_words(comment.created_at) %> ago.
+      </footer>
+    </div>
+  </div>
+</div>

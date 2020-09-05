@@ -26,7 +26,8 @@ class PublicController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.save
-    redirect_to post_read_path(@post)
+
+    # redirect_to post_read_path(@post)
   end
 
   def read

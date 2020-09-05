@@ -4,31 +4,18 @@
 <%= image_tag @post.featured_image %>
 <% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<h2><%= @post.title %></h2>
 
 <p>
-  <strong>Description:</strong>
   <%= @post.description %>
 </p>
 
-<p>
-  <strong>Published:</strong>
-  <%= @post.published %>
-</p>
+
 
 <div class="row mt-3">
   <div class="col-sm-12">
-    <h2>Conversations</h2>
-  </div>
-</div>
-
-<div class="row mt-3">
-  <div class="col-sm-12">
-    <h2>Start Conversation</h2>
-    <%= form_with url: comments_url(@post), local: true, scope: "comment" do |form| %>
+    <h4>Start Conversation</h4>
+    <%= form_with url: comments_url(@post), local: false, scope: "comment" do |form| %>
       <%= form.hidden_field :post_id, value: @post.id %>
       
       <div class="form-group">
@@ -42,17 +29,17 @@
   </div>
 </div>
 
-<% @post.comments.order("created_at desc").each do |comment|%>
-  <div class="container">
-    <div class="row card mb-3 p-2">
-      <div class="col-sm-12">
-        <div ><%= comment.body %> </div>
-        <footer class="text-muted mt-2">
-          commented by <%= comment.user.username %> about <%= time_ago_in_words(comment.created_at) %> ago.
-        </footer>
-      </div>
-    </div>
-  </div>
-<% end %>
+<br/>
 
+<div class="row mt-3">
+  <div class="col-sm-12">
+    <h4>Conversations</h4>
+  </div>
+</div>
+
+<div id="comments-list">
+  <% @post.comments.order("created_at desc").each do |comment|%>
+    <%= render partial: "comment", locals: {comment: comment} %>
+  <% end %>
+</div>
 <%= link_to 'Back', root_url %>
